@@ -1,4 +1,4 @@
-# OpenCV Video Face Detection
+# OpenCV Video/Photo Face Detection
 OpenCV를 이용하여 영상에서 얼굴을 인식하는 프로젝트 예제입니다.
 
 ## 시작하기
