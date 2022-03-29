@@ -1,7 +1,6 @@
 import cv2
 import sys
 import os
-import time
 import numpy as np
 from tkinter import filedialog
 from tkinter import messagebox
@@ -10,7 +9,6 @@ from tkinter import messagebox
 classifier_path = "./haarcascade_frontalface_default.xml"
 video = ["avi", "mp4"]
 photo = ["png", "jpeg", "jpg"]
-FPS = 60
 
 
 # 한글 경로 파일 읽기
@@ -57,9 +55,6 @@ def photo_reading(file):
 
 
 def video_reading(file):
-    # 변수 선언
-    prev_time = 0
-
     # 비디오 캡처 및 조정창 생성
     cap = cv2.VideoCapture(file)
     cv2.namedWindow("Video_Face", cv2.WINDOW_NORMAL)
@@ -75,15 +70,14 @@ def video_reading(file):
 
         # frame 읽기 및 FPS 조정
         ret, frame = cap.read()
-        current_time = time.time() - prev_time
-        if (ret is True) and (current_time > 1. / FPS):
-            prev_time = time.time()
-
+        if ret is True :
             # 얼굴 인식 부분
             frame = face_detecting(sf, mn, frame)
             cv2.imshow('Face', frame)
             if cv2.waitKey(1) == 27:
                 break
+        else :
+            break
     cap.release()
     cv2.destroyAllWindows()
 
